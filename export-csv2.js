@@ -184,38 +184,7 @@
     /**
      * Build a HTML table with the data
      */
-    Highcharts.Chart.prototype.getTable = function (useLocalDecimalPoint) {
-        var html = '<table>',
-            rows = this.getDataRows();
-
-        // Transform the rows to HTML
-        each(rows, function (row, i) {
-            var tag = i ? 'td' : 'th',
-                val,
-                j,
-                n = useLocalDecimalPoint ? (1.1).toLocaleString()[1] : '.';
-
-            html += '<tr>';
-            for (j = 0; j < row.length; j = j + 1) {
-                val = row[j];
-                // Add the cell
-                if (typeof val === 'number') {
-                    val = val.toString();
-                    if (n === ',') {
-                        val = val.replace('.', n);
-                    }
-                    html += '<' + tag + ' class="number">' + val + '</' + tag + '>';
-
-                } else {
-                    html += '<' + tag + '>' + (val === undefined ? '' : val) + '</' + tag + '>';
-                }
-            }
-
-            html += '</tr>';
-        });
-        html += '</table>';
-        return html;
-    };
+ 
 
     function getContent(chart, href, extension, content, MIME) {
         var a,
