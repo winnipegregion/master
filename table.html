@@ -10,18 +10,21 @@
         data.addColumn('string', 'Name');
         data.addColumn('number', 'Number of Oysters Consumed');
         data.addColumn('string', 'Date');
+        data.addColumn('boolean', 'Squ...');
         data.addRows([
-          ['Lisa',  3, '2016/11/15'],
-          ['Lisa',  18, '2016/12/14'],
-          ['Ryan', 18, '2016/12/14'], 
-          ['Lisa', , '2017/01/16'],
-          ['Ryan', , '']
+          ['Lisa',  3, '2016/11/15', true],
+          ['Lisa',  18, '2016/12/14', true],
+          ['Lisa',  18, '2016/12/19', false], 
+          ['Ryan', 18, '2016/12/14', false], 
+          ['Lisa', , '2017/01/16', false], 
+          ['Ryan', 3, '2016/11/15', false],
+          ['Ryan', 3, '2016/11/15', false]
       
         ]);
 
         var table = new google.visualization.Table(document.getElementById('table_div'));
 
-        table.draw(data, {showRowNumber: true, width: '80%', height: '80%'});
+        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
       }
     </script>
   </head>
