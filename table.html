@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['table']});
+      google.charts.setOnLoadCallback(drawTable);
+
+      function drawTable() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Name');
+        data.addColumn('number', 'Number of Oysters Consumed');
+        data.addColumn('string', 'Date');
+        data.addRows([
+          ['Lisa',  3, '2016/11/15'],
+          ['Lisa',  18, '2016/12/14'],
+          ['Ryan', 18, '2016/12/14'], 
+          ['Lisa', , '2017/01/16'],
+          ['Ryan', , '']
+      
+        ]);
+
+        var table = new google.visualization.Table(document.getElementById('table_div'));
+
+        table.draw(data, {showRowNumber: true, width: '80%', height: '80%'});
+      }
+    </script>
+  </head>
+  <body>
+    <div id="table_div" style="height: 200px; width: 500px"></div>
+  </body>
+</html>
