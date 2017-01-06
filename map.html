@@ -1,0 +1,53 @@
+<html>
+<head>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('upcoming', {packages: ['map']});
+    google.charts.setOnLoadCallback(drawMap);
+
+    function drawMap () {
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 'Lat');
+      data.addColumn('number', 'Long');
+      data.addColumn('string', 'Place')
+      data.addColumn('string', 'Marker')
+      
+      data.addRows([
+      [37.4232, -122.0853, 'Work: 234 gdsfffffffffffffffffffffffffffagkdgfffffffffffffffffffffffdasfsadfdsafsafsa', 'blue'],
+      [37.4289, -122.1697, 'University: 2343 gdfgdkjdf fdjjdjdf', 'green'],
+      [37.6153, -122.3900, 'Airport: 398 njdfjdsaf', 'pink'],
+      [37.4422, -122.1731, 'Shopping: 30 fxxxx', 'green']
+
+      ]);
+      var url = 'https://winnipegregion.github.io/master/svgs/';
+
+      var options = {
+        zoomLevel: 10,
+        showTooltip: true,
+        showInfoWindow: true,
+        useMapTypeControl: true,
+        icons: {
+          blue: {
+            normal:   url + 'square-stroked-15.svg',
+            selected: url + 'square-stroked-15.svg'
+          },
+          green: {
+            normal:   url + 'star-stroked-15.svg',
+            selected: url + 'star-stroked-15.svg'
+          },
+          pink: {
+            normal:   url + 'toilet-11.svg',
+            selected: url + 'toilet-11.svg'
+          }
+        }
+      };
+      var map = new google.visualization.Map(document.getElementById('map_div'));
+
+      map.draw(data, options);
+    }
+  </script>
+</head>
+<body>
+  <div id="map_div" style="height: 400px; width: 500px"></div>
+</body>
+</html>
