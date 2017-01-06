@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>	
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>% Change in Share of Capital Region Population 2011 - 2035 </title>
+
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script type="text/javascript">
+            
+$(function () {
+    Highcharts.chart('container', {
+        chart: {
+            style: {
+                fontFamily: 'Helvetica'},
+            type: 'bar',
+            },
+        colors: ['#96004B', '#4A0B2A', '#172C96'],
+        title: {
+            text: '% Change in Share of Capital Region Population 2011 - 2035 ',
+			style: {fontSize: '120%'}
+        },
+        xAxis: {
+            categories: ['North Quadrant', 'South Quadrant', 'East Quadrant', 'West Quadrant', 'Winnipeg'],
+            title: {
+                text: 'Capital Region Quadrant', style: {fontSize: '80%'
+				}
+            }
+        },
+        yAxis: {
+            title: {
+                text: '% Change',
+				style: {fontSize: '80%'
+				},
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: '%'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: '% Population Change 2011 - 2035',
+            data: [1.3, 0.4, 0.6,0.4,-2.7]
+      
+        }]
+    });
+});
+
+$('#preview').html(chart.getCSV());
+
+		</script>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://winnipegregion.github.io/master/export-csv4.js"></script>
+
+<div id="container" style="width: 100%; height: 100%; margin: 0 auto"></div>
+<h3></h3>
+<pre id="preview"></pre>
+
+
+</html>
