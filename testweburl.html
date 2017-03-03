@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>QGIS2leaf webmap test4</title>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+		<link rel="stylesheet" type="text/css" href="https://winnipegregion.github.io/master/css/own_style.css">
+		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+		<script src="js/leaflet-hash.js"></script>
+		<script src="js/Autolinker.min.js"></script>
+	</head>
+	<body>
+		<div id="map"></div>
+		<script src="https://winnipegregion.github.io/master/data/exp_PMCRBoundaryMay2016copy.js"></script>
+		<script src="https://winnipegregion.github.io/master/data/exp_DA201611TotalPop.js"></script>
+		<script>
+		var map = L.map('map', {
+			zoomControl:true, maxZoom:19
+		}).fitBounds([[49.2663995432,-98.529242251],[50.8093813123,-94.8588833001]]);
+		var hash = new L.Hash(map);
+		var additional_attrib = 'created w. <a href="https://github.com/geolicious/qgis2leaf" target ="_blank">qgis2leaf</a> by <a href="http://www.geolicious.de" target ="_blank">Geolicious</a> & contributors<br>';
+		var feature_group = new L.featureGroup([]);
+		var raster_group = new L.LayerGroup([]);
+		var basemap_0 = L.tileLayer('http://{s}.www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png', { 
+			attribution: additional_attrib + '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+		});	
+		basemap_0.addTo(map);	
+		var layerOrder=new Array();
+		function pop_DA201611TotalPop(feature, layer) {					
+			var popupContent = '<table><tr><th scope="row">OBJECTID</th><td>' + Autolinker.link(String(feature.properties['OBJECTID'])) + '</td></tr><tr><th scope="row">DAUID</th><td>' + Autolinker.link(String(feature.properties['DAUID'])) + '</td></tr><tr><th scope="row">PRUID</th><td>' + Autolinker.link(String(feature.properties['PRUID'])) + '</td></tr><tr><th scope="row">PRNAME</th><td>' + Autolinker.link(String(feature.properties['PRNAME'])) + '</td></tr><tr><th scope="row">CDUID</th><td>' + Autolinker.link(String(feature.properties['CDUID'])) + '</td></tr><tr><th scope="row">CDNAME</th><td>' + Autolinker.link(String(feature.properties['CDNAME'])) + '</td></tr><tr><th scope="row">CDTYPE</th><td>' + Autolinker.link(String(feature.properties['CDTYPE'])) + '</td></tr><tr><th scope="row">CCSUID</th><td>' + Autolinker.link(String(feature.properties['CCSUID'])) + '</td></tr><tr><th scope="row">CCSNAME</th><td>' + Autolinker.link(String(feature.properties['CCSNAME'])) + '</td></tr><tr><th scope="row">CSDUID</th><td>' + Autolinker.link(String(feature.properties['CSDUID'])) + '</td></tr><tr><th scope="row">CSDNAME</th><td>' + Autolinker.link(String(feature.properties['CSDNAME'])) + '</td></tr><tr><th scope="row">CSDTYPE</th><td>' + Autolinker.link(String(feature.properties['CSDTYPE'])) + '</td></tr><tr><th scope="row">ERUID</th><td>' + Autolinker.link(String(feature.properties['ERUID'])) + '</td></tr><tr><th scope="row">ERNAME</th><td>' + Autolinker.link(String(feature.properties['ERNAME'])) + '</td></tr><tr><th scope="row">SACCODE</th><td>' + Autolinker.link(String(feature.properties['SACCODE'])) + '</td></tr><tr><th scope="row">SACTYPE</th><td>' + Autolinker.link(String(feature.properties['SACTYPE'])) + '</td></tr><tr><th scope="row">CMAUID</th><td>' + Autolinker.link(String(feature.properties['CMAUID'])) + '</td></tr><tr><th scope="row">CMAPUID</th><td>' + Autolinker.link(String(feature.properties['CMAPUID'])) + '</td></tr><tr><th scope="row">CMANAME</th><td>' + Autolinker.link(String(feature.properties['CMANAME'])) + '</td></tr><tr><th scope="row">CMATYPE</th><td>' + Autolinker.link(String(feature.properties['CMATYPE'])) + '</td></tr><tr><th scope="row">CTUID</th><td>' + Autolinker.link(String(feature.properties['CTUID'])) + '</td></tr><tr><th scope="row">CTNAME</th><td>' + Autolinker.link(String(feature.properties['CTNAME'])) + '</td></tr><tr><th scope="row">ADAUID</th><td>' + Autolinker.link(String(feature.properties['ADAUID'])) + '</td></tr><tr><th scope="row">DAUIDnum</th><td>' + Autolinker.link(String(feature.properties['DAUIDnum'])) + '</td></tr><tr><th scope="row">PopChange</th><td>' + Autolinker.link(String(feature.properties['PopChange'])) + '</td></tr><tr><th scope="row">PopChange1</th><td>' + Autolinker.link(String(feature.properties['PopChange1'])) + '</td></tr><tr><th scope="row">Geocode</th><td>' + Autolinker.link(String(feature.properties['Geocode'])) + '</td></tr><tr><th scope="row">Province</th><td>' + Autolinker.link(String(feature.properties['Province'])) + '</td></tr><tr><th scope="row">GeoCensusD</th><td>' + Autolinker.link(String(feature.properties['GeoCensusD'])) + '</td></tr><tr><th scope="row">CodeCensus</th><td>' + Autolinker.link(String(feature.properties['CodeCensus'])) + '</td></tr><tr><th scope="row">Pop2016</th><td>' + Autolinker.link(String(feature.properties['Pop2016'])) + '</td></tr><tr><th scope="row">Totalprivd</th><td>' + Autolinker.link(String(feature.properties['Totalprivd'])) + '</td></tr><tr><th scope="row">Dwelloccup</th><td>' + Autolinker.link(String(feature.properties['Dwelloccup'])) + '</td></tr><tr><th scope="row">AreaKM2016</th><td>' + Autolinker.link(String(feature.properties['AreaKM2016'])) + '</td></tr><tr><th scope="row">PopDens_KM</th><td>' + Autolinker.link(String(feature.properties['PopDens_KM'])) + '</td></tr><tr><th scope="row">F10</th><td>' + Autolinker.link(String(feature.properties['F10'])) + '</td></tr><tr><th scope="row">F11</th><td>' + Autolinker.link(String(feature.properties['F11'])) + '</td></tr><tr><th scope="row">Geography</th><td>' + Autolinker.link(String(feature.properties['Geography'])) + '</td></tr><tr><th scope="row">Pop2011</th><td>' + Autolinker.link(String(feature.properties['Pop2011'])) + '</td></tr><tr><th scope="row">Dwell2011</th><td>' + Autolinker.link(String(feature.properties['Dwell2011'])) + '</td></tr><tr><th scope="row">DwellUsual</th><td>' + Autolinker.link(String(feature.properties['DwellUsual'])) + '</td></tr><tr><th scope="row">Areakm2011</th><td>' + Autolinker.link(String(feature.properties['Areakm2011'])) + '</td></tr><tr><th scope="row">DwellingCh</th><td>' + Autolinker.link(String(feature.properties['DwellingCh'])) + '</td></tr><tr><th scope="row">DensityCha</th><td>' + Autolinker.link(String(feature.properties['DensityCha'])) + '</td></tr><tr><th scope="row">AreaKM</th><td>' + Autolinker.link(String(feature.properties['AreaKM'])) + '</td></tr><tr><th scope="row">PopDensity</th><td>' + Autolinker.link(String(feature.properties['PopDensity'])) + '</td></tr><tr><th scope="row">PopDensi_1</th><td>' + Autolinker.link(String(feature.properties['PopDensi_1'])) + '</td></tr><tr><th scope="row">PopChgPerc</th><td>' + Autolinker.link(String(feature.properties['PopChgPerc'])) + '</td></tr><tr><th scope="row">DwellDenPe</th><td>' + Autolinker.link(String(feature.properties['DwellDenPe'])) + '</td></tr><tr><th scope="row">Shape_Leng</th><td>' + Autolinker.link(String(feature.properties['Shape_Leng'])) + '</td></tr><tr><th scope="row">Shape_Area</th><td>' + Autolinker.link(String(feature.properties['Shape_Area'])) + '</td></tr></table>';
+			layer.bindPopup(popupContent);
+		}
+
+		function doStyleDA201611TotalPop(feature) {
+			if (feature.properties.PopChange1 >= -294.0 && feature.properties.PopChange1 <= -95.0) {
+				return {
+					color: '#322828',
+					weight: '0.8',
+					fillColor: '#2c7bb6',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.PopChange1 >= -95.0 && feature.properties.PopChange1 <= 0.0) {
+				return {
+					color: '#322828',
+					weight: '0.8',
+					fillColor: '#6baacf',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.PopChange1 >= 0.0 && feature.properties.PopChange1 <= 83.0) {
+				return {
+					color: '#322828',
+					weight: '0.8',
+					fillColor: '#abd9e9',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.PopChange1 >= 83.0 && feature.properties.PopChange1 <= 264.0) {
+				return {
+					color: '#322828',
+					weight: '0.8',
+					fillColor: '#d5ecd4',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.PopChange1 >= 264.0 && feature.properties.PopChange1 <= 543.0) {
+				return {
+					color: '#322828',
+					weight: '0.8',
+					fillColor: '#ffffbf',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.PopChange1 >= 543.0 && feature.properties.PopChange1 <= 967.0) {
+				return {
+					color: '#322828',
+					weight: '0.8',
+					fillColor: '#fed690',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.PopChange1 >= 967.0 && feature.properties.PopChange1 <= 1650.0) {
+				return {
+					color: '#322828',
+					weight: '0.8',
+					fillColor: '#fdae61',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.PopChange1 >= 1650.0 && feature.properties.PopChange1 <= 3338.0) {
+				return {
+					color: '#322828',
+					weight: '0.8',
+					fillColor: '#ea633e',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.PopChange1 >= 3338.0 && feature.properties.PopChange1 <= 11349.0) {
+				return {
+					color: '#322828',
+					weight: '0.8',
+					fillColor: '#d7191c',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+		}
+		var exp_DA201611TotalPopJSON = new L.geoJson(exp_DA201611TotalPop,{
+			onEachFeature: pop_DA201611TotalPop,
+			style: doStyleDA201611TotalPop
+		});
+		//add comment sign to hide this layer on the map in the initial view.
+		feature_group.addLayer(exp_DA201611TotalPopJSON);
+		function pop_PMCRBoundaryMay2016copy(feature, layer) {					
+			var popupContent = '<table><tr><th scope="row">OBJECTID</th><td>' + Autolinker.link(String(feature.properties['OBJECTID'])) + '</td></tr><tr><th scope="row">OBJECTID_1</th><td>' + Autolinker.link(String(feature.properties['OBJECTID_1'])) + '</td></tr><tr><th scope="row">MUNI_NAME</th><td>' + Autolinker.link(String(feature.properties['MUNI_NAME'])) + '</td></tr><tr><th scope="row">MUNI_NO</th><td>' + Autolinker.link(String(feature.properties['MUNI_NO'])) + '</td></tr><tr><th scope="row">ASMT_DISTR</th><td>' + Autolinker.link(String(feature.properties['ASMT_DISTR'])) + '</td></tr><tr><th scope="row">ASMT_DIST_</th><td>' + Autolinker.link(String(feature.properties['ASMT_DIST_'])) + '</td></tr><tr><th scope="row">PLAN_RGN_O</th><td>' + Autolinker.link(String(feature.properties['PLAN_RGN_O'])) + '</td></tr><tr><th scope="row">PLAN_RGN_1</th><td>' + Autolinker.link(String(feature.properties['PLAN_RGN_1'])) + '</td></tr><tr><th scope="row">PLAN_DIST_</th><td>' + Autolinker.link(String(feature.properties['PLAN_DIST_'])) + '</td></tr><tr><th scope="row">PLAN_DIST1</th><td>' + Autolinker.link(String(feature.properties['PLAN_DIST1'])) + '</td></tr><tr><th scope="row">MUNI_STATU</th><td>' + Autolinker.link(String(feature.properties['MUNI_STATU'])) + '</td></tr><tr><th scope="row">PROV_ELECT</th><td>' + Autolinker.link(String(feature.properties['PROV_ELECT'])) + '</td></tr><tr><th scope="row">LEGAL_NAME</th><td>' + Autolinker.link(String(feature.properties['LEGAL_NAME'])) + '</td></tr><tr><th scope="row">Shape_Leng</th><td>' + Autolinker.link(String(feature.properties['Shape_Leng'])) + '</td></tr><tr><th scope="row">AreaKM</th><td>' + Autolinker.link(String(feature.properties['AreaKM'])) + '</td></tr><tr><th scope="row">Shape_Le_1</th><td>' + Autolinker.link(String(feature.properties['Shape_Le_1'])) + '</td></tr><tr><th scope="row">Shape_Area</th><td>' + Autolinker.link(String(feature.properties['Shape_Area'])) + '</td></tr></table>';
+			layer.bindPopup(popupContent);
+		}
+
+		function doStylePMCRBoundaryMay2016copy(feature) {
+				return {
+					color: '#000000',
+					fillColor: '#a09e9e',
+					weight: 3.75,
+					dashArray: '',
+					opacity: 1.0,
+					fillOpacity: 1.0
+				};
+
+		}
+		var exp_PMCRBoundaryMay2016copyJSON = new L.geoJson(exp_PMCRBoundaryMay2016copy,{
+			onEachFeature: pop_PMCRBoundaryMay2016copy,
+			style: doStylePMCRBoundaryMay2016copy
+		});
+		layerOrder[layerOrder.length] = exp_PMCRBoundaryMay2016copyJSON;
+		for (index = 0; index < layerOrder.length; index++) {
+			feature_group.removeLayer(layerOrder[index]);feature_group.addLayer(layerOrder[index]);
+		}
+		//add comment sign to hide this layer on the map in the initial view.
+		feature_group.addLayer(exp_PMCRBoundaryMay2016copyJSON);
+
+		feature_group.addTo(map);
+		var title = new L.Control();
+		title.onAdd = function (map) {
+			this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+			this.update();
+			return this._div;
+		};
+		title.update = function () {
+			this._div.innerHTML = '<h2>This is the title</h2>This is the subtitle'
+		};
+		title.addTo(map);
+	var baseMaps = {
+		'OSM Black & White': basemap_0
+	};
+		L.control.layers(baseMaps,{"PMCRBoundaryMay2016copy": exp_PMCRBoundaryMay2016copyJSON,"DA201611TotalPop": exp_DA201611TotalPopJSON},{collapsed:false}).addTo(map);
+		map.locate({setView: true, maxZoom: 16});
+		function onLocationFound(e) {
+    		var radius = e.accuracy / 2;
+			L.marker(e.latlng).addTo(map)
+        	.bindPopup("You are within " + radius + " meters from this point").openPopup();
+			L.circle(e.latlng, radius).addTo(map);
+		}
+		map.on('locationfound', onLocationFound);
+		
+		L.control.scale({options: {position: 'bottomleft',maxWidth: 100,metric: true,imperial: false,updateWhenIdle: false}}).addTo(map);
+	</script>
+</body>
+</html>
