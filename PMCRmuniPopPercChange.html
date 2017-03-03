@@ -3,7 +3,7 @@
 	<head>	
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>Manitoba Capital Region Total Population 2011 & 2016</title>
+		<title>% Population Change 2011 – 2016 in MB Capital Region</title>
 
 		<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 		<script type="text/javascript">
@@ -14,7 +14,10 @@ $(function () {
 			fallbacktoExportServer: false
 		},
         chart: {
-			height: 680,
+			height: 500,
+			spacingLeft: null,
+			spacingRight: null,
+			spacingBottom: null,
             style: {
                 fontFamily: 'Helvetica'},
             type: 'bar',
@@ -23,39 +26,36 @@ $(function () {
 			panning: true,
 			panKey: 'shift'
             },
-        colors: ['#B4B2AF', '#96378E', '#172C96'],
+        colors: ['#96378E', '#172C96'],
         title: {
-            text: 'Manitoba Capital Region Total Population 2011 & 2016',
+            text: '% Population Change 2011 – 2016 in MB Capital Region',
 			style: {
 				fontSize: '120%',
 				fontWeight: 'bold',
 				colors: ['#2A2A2A'],
 			}
         },
-		subtitle: {
-			text: 'To zoom, hold first finger on graph area and drag second finger to the right'
-		},
         xAxis: {
             categories: [
-				'City of Winnipeg', 
-				'RM of Springfield', 
-				'RM of St. Andrews', 
+				'Town of Niverville', 
+				'RM of Ritchot',
+				'RM of Macdonald', 
+				'RM of St. François Xavier', 
 				'RM of Taché',
-				'RM of St. Clements',
+				'RM of Headingley',
+				'Village of Dunnottar',
+				'RM of Springfield',
+				'RM of West St. Paul',
+				'RM of Cartier',
+				'City of Winnipeg',
+				'Town of Stonewall',
 				'City of Selkirk',
 				'RM of East St. Paul',
-				'RM of Rockwood',
-				'RM of Macdonald',
-				'RM of Ritchot',
-				'RM of West St. Paul',
-				'Town of Stonewall',
-				'Town of Niverville',
-				'RM of Headingley',
-				'RM of Cartier',
-				'RM of St. François Xavier',
+				'RM of St. Clements',
 				'RM of Rosser',
-				'Village of Dunnottar'
-			],
+				'RM of St. Andrews',
+				'RM of Rockwood'
+				],
             title: {
                 text: '', style: {fontSize: '80%'
 				}
@@ -63,7 +63,7 @@ $(function () {
         },
         yAxis: {
             title: {
-                text: 'Total Population',
+                text: '% Total Population Change',
 				style: {fontSize: '80%'
 				},
                 align: 'middle'
@@ -73,19 +73,20 @@ $(function () {
             }
         },
         tooltip: {
-            valueSuffix: '',
+            valueSuffix: '%',
 			followTouchMove: false
         },
         plotOptions: {
             bar: {
                 dataLabels: {
-                    enabled: true
+                    enabled: true,
+					format: '{y} %'
                 },
 				maxPointWidth: null
             },
 			series: {
 				groupPadding: .1,
-				pointPadding: .12,
+				pointPadding: .1
 		}
         },
         
@@ -93,50 +94,29 @@ $(function () {
             text: 'Statistics Canada (2017)',
         },
         series: [{
-            name: '2011',
+            name: '% Total Population Change',
             data: [
-				663617,
-				14069,
-				11875,
-				10284,
-				10505,
-				9834,
-				9046,
-				7964,
-				6280,
-				5478,
-				4932,
-				4536,
-				3540,
-				3215,
-				3153,
-				1240,
-				1352,
-				696,
-			]
-		}, {
-			name: '2016',
-			data: [
-				705244,
-				15342,
-				11913,
-				11568,
-				10876,
-				10278,
-				9372,
-				7823,
-				7162,
-				6679,
-				5368,
-				4809,
-				4610,
-				3579,
-				3368,
-				1411,
-				1372,
-				763
-			]
-        }]
+				30.2,
+				21.9,
+				14.0,
+				13.8,
+				12.5,
+				11.3,
+				9.6,
+				9.0,
+				8.8,
+				6.8,
+				6.3,
+				6.0,
+				4.5,
+				3.6,
+				3.5,
+				1.5,
+				0.3,
+				-1.8
+			],
+			showInLegend: false
+		}]
     });
 });
 
@@ -150,7 +130,7 @@ $('#preview').html(chart.getCSV());
 <script src="modules/offline-exporting.js"></script>
 <script src="modules/export-csv4.js"></script>
 
-<div id="container" style="width: 90%; height: 100%; margin: 0 auto"></div>
+<div id="container" style="width: 80%; height: 40%; margin: 0 auto"></div>
 <h3></h3>
 <pre id="preview"></pre>
 </body>
