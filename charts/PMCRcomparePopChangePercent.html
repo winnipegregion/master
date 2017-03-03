@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+	<head>	
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Manitoba & Capital Region Total Population 2011 - 2016</title>
+
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript">
+            
+$(function () {
+    Highcharts.chart('container', {
+		exporting: {
+			fallbacktoExportServer: false
+		},
+        chart: {
+			height: 200,
+			spacingLeft: null,
+			spacingRight: null,
+			spacingBottom: null,
+            style: {
+                fontFamily: 'Helvetica'},
+            type: 'bar',
+			zoomType: 'y',
+			pinchType: 'y',
+			panning: true,
+			panKey: 'shift'
+            },
+        colors: ['#96378E', '#172C96'],
+        title: {
+            text: 'Manitoba & Capital Region Total Population  2011 – 2016',
+			style: {
+				fontSize: '120%',
+				fontWeight: 'bold',
+				colors: ['#2A2A2A'],
+			}
+        },
+        xAxis: {
+            categories: ['Capital Region (without Winnipeg)', 'Winnipeg', 'Capital Region (including Winnipeg)', 'Manitoba'],
+            title: {
+                text: '', style: {fontSize: '80%'
+				}
+            }
+        },
+        yAxis: {
+            title: {
+                text: '% Total Population Change',
+				style: {fontSize: '80%'
+				},
+                align: 'middle'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: '%',
+			followTouchMove: false
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true,
+					format: '{y} %'
+                },
+				maxPointWidth: null
+            },
+			series: {
+				groupPadding: .1,
+				pointPadding: .11
+		}
+        },
+        
+        credits: {
+            text: 'Statistics Canada (2017)',
+        },
+        series: [{
+            name: '% Total Population Change',
+            data: [7.7,6.3,6.5,5.8],
+			showInLegend: false
+		}]
+    });
+});
+
+$('#preview').html(chart.getCSV());
+
+		</script>
+	</head>
+<body>	
+<script src="code/highcharts.js"></script>
+<script src="modules/exporting.js"></script>
+<script src="modules/offline-exporting.js"></script>
+<script src="modules/export-csv4.js"></script>
+
+<div id="container" style="width: 80%; height: 40%; margin: 0 auto"></div>
+<h3></h3>
+<pre id="preview"></pre>
+</body>
+</html>

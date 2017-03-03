@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html>
+	<head>	
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Manitoba Capital Region Total Population 2011 & 2016</title>
+
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript">
+            
+$(function () {
+    Highcharts.chart('container', {
+		exporting: {
+			fallbacktoExportServer: false
+		},
+        chart: {
+			height: 680,
+            style: {
+                fontFamily: 'Helvetica'},
+            type: 'bar',
+			zoomType: 'y',
+			pinchType: 'y',
+			panning: true,
+			panKey: 'shift'
+            },
+        colors: ['#B4B2AF', '#96378E', '#172C96'],
+        title: {
+            text: 'Manitoba Capital Region Total Population 2011 & 2016',
+			style: {
+				fontSize: '120%',
+				fontWeight: 'bold',
+				colors: ['#2A2A2A'],
+			}
+        },
+		subtitle: {
+			text: 'To zoom, hold first finger on graph area and drag second finger to the right'
+		},
+        xAxis: {
+            categories: [
+				'City of Winnipeg', 
+				'RM of Springfield', 
+				'RM of St. Andrews', 
+				'RM of Taché',
+				'RM of St. Clements',
+				'City of Selkirk',
+				'RM of East St. Paul',
+				'RM of Rockwood',
+				'RM of Macdonald',
+				'RM of Ritchot',
+				'RM of West St. Paul',
+				'Town of Stonewall',
+				'Town of Niverville',
+				'RM of Headingley',
+				'RM of Cartier',
+				'RM of St. François Xavier',
+				'RM of Rosser',
+				'Village of Dunnottar'
+			],
+            title: {
+                text: '', style: {fontSize: '80%'
+				}
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Total Population',
+				style: {fontSize: '80%'
+				},
+                align: 'middle'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: '',
+			followTouchMove: false
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                },
+				maxPointWidth: null
+            },
+			series: {
+				groupPadding: .1,
+				pointPadding: .12,
+		}
+        },
+        
+        credits: {
+            text: 'Statistics Canada (2017)',
+        },
+        series: [{
+            name: '2011',
+            data: [
+				663617,
+				14069,
+				11875,
+				10284,
+				10505,
+				9834,
+				9046,
+				7964,
+				6280,
+				5478,
+				4932,
+				4536,
+				3540,
+				3215,
+				3153,
+				1240,
+				1352,
+				696,
+			]
+		}, {
+			name: '2016',
+			data: [
+				705244,
+				15342,
+				11913,
+				11568,
+				10876,
+				10278,
+				9372,
+				7823,
+				7162,
+				6679,
+				5368,
+				4809,
+				4610,
+				3579,
+				3368,
+				1411,
+				1372,
+				763
+			]
+        }]
+    });
+});
+
+$('#preview').html(chart.getCSV());
+
+		</script>
+	</head>
+<body>	
+<script src="code/highcharts.js"></script>
+<script src="modules/exporting.js"></script>
+<script src="modules/offline-exporting.js"></script>
+<script src="modules/export-csv4.js"></script>
+
+<div id="container" style="width: 90%; height: 100%; margin: 0 auto"></div>
+<h3></h3>
+<pre id="preview"></pre>
+</body>
+</html>
