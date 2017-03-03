@@ -19,14 +19,11 @@ $(function () {
                 fontFamily: 'Helvetica'},
             type: 'bar',
 			zoomType: 'y',
-			pinchType: true,
-		        panning: true,
+			pinchType: 'y',
+			panning: true,
 			panKey: 'shift'
             },
         colors: ['#B4B2AF', '#96378E', '#172C96'],
-	tooltip: {
-			followTouchMove: false,
-		},    
         title: {
             text: 'Manitoba Capital Region Total Population 2011 & 2016',
 			style: {
@@ -76,7 +73,8 @@ $(function () {
             }
         },
         tooltip: {
-            valueSuffix: ''
+            valueSuffix: '',
+			followTouchMove: true
         },
         plotOptions: {
             bar: {
