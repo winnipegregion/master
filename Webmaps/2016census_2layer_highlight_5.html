@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+<head>
+	<title>GeoJSON tutorial - Leaflet</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="css/leaflet.css" />
+	<link rel="stylesheet" href="css/style_2016census.css" />
+	<script src="js/leaflet.js"></script>
+	<script src="js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<div id="map"></div>
+<script src="data/exp_DA201611TotalPop.js"></script>
+<script src="data/exp_PMCRBoundaries2016Census.js"></script>
+<script>
+
+var map = L.map('map',{
+	center: [49.885163,-97.129694],
+	zoom: 9,
+	maxZoom: 25
+
+});
+
+map.createPane('labels');
+	
+map.getPane('labels').style.zIndex = 450;
+
+map.getPane('labels').style.pointerEvents = 'none';
+	
+var cartodbAttribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>';
+
+var greybase = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png', {
+	attribution: cartodbAttribution
+}).addTo(map);
+
+L.tileLayer('http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
+		attribution: cartodbAttribution,
+		pane: 'labels'
+	}).addTo(map);
+	
+//Add GeoJSON
+
+//var popCustom = {
+//	width: 400
+//}
+
+function DApopUp(feature,layer){
+	//mouse highlight
+	layer.on({
+		mouseover: highlightFeature,
+		mouseout: resetHighlightDA,
+	}); {
+		layer.bindPopup(
+			'<table><tr><th scope="row">Municipality  </th><td>' + feature.properties.CSDNAME + 
+			'<tr><th scope="row">DAUID  </th><td>' +  feature.properties.DAUID +
+			'<tr><th scope="row">2016 Population  </th><td>' +  feature.properties.Pop2016 +
+			'<tr><th scope="row">2016 Population Density (persons/km)  </th><td>' + feature.properties.PopDensity +
+			'</td></tr></table>'
+			   );
+	}	
+}
+	
+function DAgetColour(p){
+	return p > 5418.0 ? '#96378e':
+			p > 3164.0 ? '#a3509c':
+			p > 2016.0 ? '#b069aa':
+			p > 1305.0 ? '#bd82b8':
+			p > 906.0 ? '#ca9bc6':
+			p > 672.0 ? '#d7b4d4':
+			p > 522.0 ? '#e4cde2':
+			p > 382.0 ? '#f1e6f0':
+						'#ffffff';
+}
+
+function styleDA201611TotalPop(feature){
+	return {
+		weight: .9,
+		opacity: 1,
+		color: 'grey',
+		dashArray: '1',
+		fillOpacity: .8,
+		fillColor: DAgetColour(feature.properties.Pop2016)
+	};
+}
+
+//add highlight on mouseover
+function highlightFeature(e) {
+	var layer = e.target;
+
+		layer.setStyle({
+			weight: 3,
+			color: 'purple',
+			dashArray: '',
+			fillOpacity: 0.7
+		});
+
+	if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+			layer.bringToFront();
+		}
+	}
+	
+var layerDA;
+
+function resetHighlightDA(e) {
+	layerDA.resetStyle(e.target);
+}
+
+	
+layerDA = L.geoJson(exp_DA201611TotalPop,{
+	onEachFeature: DApopUp,
+	style: styleDA201611TotalPop
+}).addTo(map);
+	
+var title = new L.Control();
+		title.onAdd = function (map) {
+			this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+			this.update();
+			return this._div;
+		};
+	
+	title.update = function () {
+			this._div.innerHTML = '<h2>2016 Population</h2>Statistics Canada, 2017'
+		};
+		title.addTo(map);
+	
+var legend = L.control({position: 'bottomright'});
+
+	legend.onAdd = function (map) {
+
+		var div = L.DomUtil.create('div', 'info legend'),
+			grades = [0, 382.0, 522.00, 672.0, 906.0, 1305.0, 2016.0, 3164.0, 5418.0],
+			labels = [],
+			from, to;
+
+		for (var i = 0; i < grades.length; i++) {
+			from = grades[i];
+			to = grades[i + 1];
+
+			labels.push(
+				'<i style="background:' + DAgetColour(from + 1) + '"></i> ' +
+				from + (to ? ' &ndash; ' + to : '+'));
+		}
+
+		div.innerHTML = labels.join('<br>');
+		return div;
+	};
+
+	legend.addTo(map);
+	
+//Second layer Municipal Boundaries
+
+var layerMunis;
+	
+function resetHighlightMunis(e) {
+	layerMunis.resetStyle(e.target);
+}
+	
+	
+function MunipopUp(feature,layer){
+	//mouse highlight
+	layer.on({
+		mouseover: highlightFeature,
+		mouseout: resetHighlightMunis,
+	}); {
+		layer.bindPopup(
+			'<table><tr><th scope="row">Municipality</th><td>' + feature.properties.MUNI_NAME + 
+			'<tr><th scope="row">2016 Population</th><td>' +  feature.properties.Pop2016 +
+			'</td></tr></table>'
+			   );
+	}	
+}
+	
+//Set style
+function stylePMCRBoundaryMay2016copy(feature){
+	return {
+		weight: 2.3,
+		opacity: .9,
+		color: '#77706E',
+		dashArray: '0',
+		fillOpacity: 0,
+		fillColor: 'transparent'
+	};
+}
+	
+layerMunis = L.geoJson(exp_PMCRBoundaries2016Census,{
+	onEachFeature: MunipopUp,
+	style: stylePMCRBoundaryMay2016copy
+}).addTo(map);
+
+//var basemaps = {
+	//"Basemap": greybase
+//}
+	
+var overlays = {
+	"Municipalities": layerMunis,
+	"Dissemination Areas": layerDA
+};	
+	
+L.control.layers(null, overlays).addTo(map);
+	
+</script>
+</body>
+</html>
