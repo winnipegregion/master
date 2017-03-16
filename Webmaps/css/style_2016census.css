@@ -4,7 +4,7 @@ html, body, #map{
 	position: centre;
 	height: 92vh;
 	width: 92vw;
-	font: 9%/12% Arial, Helvetica, sans-serif;
+	font: 9px/12px Arial, Helvetica, sans-serif;
 }
 
 .infoHeader{
