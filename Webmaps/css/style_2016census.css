@@ -33,9 +33,9 @@ html, body, #map{
 
 .legend { 
 	text-align: left; 
-	line-height: 20vh; 
+	line-height: 200vh; 
 	color: #555; 
-	font-size: 1vh;
+	font-size: .8vh;
 } 
 
 .legend i { 
