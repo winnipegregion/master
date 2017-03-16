@@ -35,13 +35,13 @@ html, body, #map{
 	text-align: left; 
 	line-height: 200vh; 
 	color: #555; 
-	font-size: .8vh;
+	font-size: .1vh;
 } 
 
 .legend i { 
-	width: 20vw; 
+	width: 50vw; 
 	height: 100vh; 
 	float: left; 
-	margin-right: 10vw; 
+	margin-right: 1vw; 
 	opacity: 0.8;
 }
