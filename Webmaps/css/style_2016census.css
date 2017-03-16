@@ -2,8 +2,8 @@
 
 html, body, #map{
 	position: centre;
-	height: 92%;
-	width: 92%;
+	height: 92vh;
+	width: 92vw;
 	font: 9%/12% Arial, Helvetica, sans-serif;
 }
 
@@ -33,14 +33,14 @@ html, body, #map{
 
 .legend { 
 	text-align: left; 
-	line-height: 200vh; 
+	line-height: 18px; 
 	color: #555; 
-	font-size: .1vh;
+	font-size: 8px;
 } 
 
 .legend i { 
-	width: 50vw; 
-	height: 100vh; 
+	width: 18px; 
+	height: 25px; 
 	float: left; 
 	margin-right: 1vw; 
 	opacity: 0.8;
