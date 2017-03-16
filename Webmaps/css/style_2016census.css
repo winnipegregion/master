@@ -39,8 +39,8 @@ html, body, #map{
 } 
 
 .legend i { 
-	width: 18px; 
-	height: 18px; 
+	width: 20%; 
+	height: 20%; 
 	float: left; 
 	margin-right: 8px; 
 	opacity: 0.8;
