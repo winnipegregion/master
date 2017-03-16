@@ -33,14 +33,14 @@ html, body, #map{
 
 .legend { 
 	text-align: left; 
-	line-height: 10vh; 
+	line-height: 20vh; 
 	color: #555; 
 	font-size: 1vh;
 } 
 
 .legend i { 
 	width: 20vw; 
-	height: 50vh; 
+	height: 100vh; 
 	float: left; 
 	margin-right: 10vw; 
 	opacity: 0.8;
