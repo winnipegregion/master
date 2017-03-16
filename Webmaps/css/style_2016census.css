@@ -1,6 +1,7 @@
 /* CSS Document */
 
 html, body, #map{
+	position: absolute;
 	height: 92%;
 	width: 92%;
 	font: 12px/14px Arial, Helvetica, sans-serif;
