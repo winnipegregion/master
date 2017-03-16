@@ -40,7 +40,7 @@ html, body, #map{
 
 .legend i { 
 	width: 20%; 
-	height: 20%; 
+	height: 50%; 
 	float: left; 
 	margin-right: 8px; 
 	opacity: 0.8;
