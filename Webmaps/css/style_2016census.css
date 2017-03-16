@@ -33,7 +33,7 @@ html, body, #map{
 
 .legend { 
 	text-align: left; 
-	line-height: 18%; 
+	line-height: 10vh; 
 	color: #555; 
 	font-size: 1vh;
 } 
