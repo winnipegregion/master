@@ -10,7 +10,7 @@
 	<script src="js/jquery-3.1.1.min.js"></script>
 </head>
 <body>
-<div id="map" style="width: 90%; height; 90%; margin: 0 auto"></div>
+<div id="map" style="width: 95%; height: 95%; margin: auto"></div>
 <script src="data/SolidWasteSites04102016.js"></script>
 <script src="data/SolidWasteSites04102016.geojson"></script>
 <script src="data/exp_PMCRBoundaries2016Census.js"></script>
@@ -21,7 +21,7 @@
 
 var map = L.map('map',{
 	center: [49.944081,-97.172193],
-	zoom: 8.5,
+	zoom: 8,
 	maxZoom: 25
 
 });
@@ -109,7 +109,7 @@ function pointRender (feature, latlng){
 
 function styleBoundary(feature){
 	return{
-		weight: 2.6,
+		weight: 2.2,
 		opacity: .9,
 		color: '#11416B',
 		dashArray: '12, 8, 6, 8',
