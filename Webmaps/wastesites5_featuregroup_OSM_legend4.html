@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+<head>
+	<title>MB Capital Region 2016 Population</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+	<link rel="stylesheet" href="css/style_wastesites.css" />
+	<script src="js/leaflet.js"></script>
+	<script src="js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<div id="map" style="width: 90%; height; 90%; margin: 0 auto"></div>
+<script src="data/SolidWasteSites04102016.js"></script>
+<script src="data/SolidWasteSites04102016.geojson"></script>
+<script src="data/exp_PMCRBoundaries2016Census.js"></script>
+<script src="data/wg84_SolidWasteSites04102016.js"></script>
+<script src="data/wastesites3.js"></script>
+<script src="data/exp_PMCRBoundaries2016Census.js"></script>
+<script>
+
+var map = L.map('map',{
+	center: [49.944081,-97.172193],
+	zoom: 8.5,
+	maxZoom: 25
+
+});
+
+map.createPane('labels');
+	
+map.getPane('labels').style.zIndex = 450;
+
+map.getPane('labels').style.pointerEvents = 'none';
+	
+var cartodbAttribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>';
+
+var greybase = L.tileLayer('http://{s}.grayscale.osm.maptiles.xyz/{z}/{x}/{y}.png', {
+	attribution: cartodbAttribution,
+	opacity: .8
+}).addTo(map);
+
+
+
+//get fields
+
+function wastePopUp(feature, layer){
+	layer.bindPopup(
+		'<table><tr><th scope="row">Location</th><td>' + feature.properties.FacilityLo + 
+		'<tr><th scope="row">Facility Type</th><td>' +  feature.properties.FacilityTy +
+		'<tr><th scope="row">Owner</th><td>' +  feature.properties.Owner +
+		'<tr><th scope="row">Longitude</th><td>' + feature.properties.Longitude +
+		'<tr><th scope="row">Latitude</th><td>' + feature.properties.Latitude +
+		'</td></tr></table>'	
+	);
+}
+	
+	
+//var generalStyle = { radius: 2, fillColor: "red"};
+
+//Add layers
+	
+//function pointsRender (feature, latlng){
+//return L.circleMarker(latlng, pointStyle);
+//}
+
+//unique style by site type	
+function sitetypeStyle (feature){
+	switch(feature.properties.FacilityTy){
+		case 'WDG' : return {weight: 1.5, radius: 6, opacity: 1, color: "#DF4827", fillOpacity: .6, fillColor: "#DF4827"};
+		case 'WTS' : return {weight: 1.5, radius: 6, opacity: 1, color: "#01867B",fillOpacity: .6, fillColor: "#01867B"};
+		case 'MRF' : return {weight: 1.5, radius: 6, opacity: 1, color: "#7CC24B",fillOpacity: .6, fillColor: "#7CC24B"};
+		default: return {color: "white", opacity: 0};
+			
+	}
+}	
+
+//add title
+var title = new L.Control();
+		title.onAdd = function (map) {
+			this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+			this.update();
+			return this._div;
+		};
+	
+	title.update = function () {
+			this._div.innerHTML = '<h2>Solid Waste Sites</h2><p>Partnership of the Manitoba Capital Region, 2016</p>'
+		};
+		title.addTo(map);
+
+//add legend
+var legend = L.control({position: 'bottomright'});
+
+	legend.onAdd = function (map) {
+
+		var div = L.DomUtil.create('div', 'info legend');
+		div.innerHTML += '<p><i style="background: #DF4827"></i><p>Waste Disposal Ground (WDG)</p>';
+		div.innerHTML += '<p><i style="background: #01867B"></i>Waste Transfer Station (WTS)</p>';
+		div.innerHTML += '<p><i style="background: #7CC24B"></i>Material Recovery Facility (MRF)</p>';
+		return div;
+	};
+
+	legend.addTo(map);
+	
+	
+function pointRender (feature, latlng){
+		return L.circleMarker(latlng, sitetypeStyle);}
+
+//add pmcr boundaries
+
+function styleBoundary(feature){
+	return{
+		weight: 2.6,
+		opacity: .9,
+		color: '#11416B',
+		dashArray: '12, 8, 6, 8',
+		lineCap: 'round',
+		lineJoin: 'round',
+		fillOpacity: 0,
+		fillColor: 'transparent'
+	};
+}
+	
+L.geoJSON(exp_PMCRBoundaries2016Census,{
+	style: styleBoundary
+	}
+).addTo(map);
+	
+	
+//add waste sites	
+L.geoJSON(wastesites3,{
+	pointToLayer: pointRender,
+	onEachFeature: wastePopUp,
+	style: sitetypeStyle
+}).addTo(map);
+	
+</script>
+</body>
+</html>
