@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+<style>
+	h1 {font-family: Arial;
+		font-size: 20px;
+		font-weight: 600;
+	}
+	
+	h2 {font-family: Arial;
+		font-size: 16px;
+		font-weight: bold}
+	
+	h3 {
+		font-size: 13px;
+		}
+	
+	body {font-family: Arial;
+		font-size: 12px;
+		}
+</style>
+
+	
+</head>
+<body>
+
+	  <h1>Specify Permissions</h1>
+
+   Essential Functions<br>
+    <input type="checkbox" name="general" value="ownPerInfo" checked>View own personal information<br>
+    <input type="checkbox" name="general" value="ownPay" checked>View own pay rate and hours<br>
+    <input type="checkbox" name="general" value="ownPerInfo" checked>View Incident Report staff attended<br>
+     <input type="checkbox" name="general" value="ownPerInfo" checked>Submit Personal Exposure Report<br><br>
+
+    Reporting<br>
+    <input type="checkbox" name="reporting" value="inc_report">Incident Reporting (including MPI report and exposures)<br><br>
+    Equipment<br>
+    <input type="checkbox" name="equipment" value="addEquipment">Add Equipment<br>
+     <input type="checkbox" name="equipment" value="addEquipment">Change Existing Equipment Information<br>
+    <input type="checkbox" name="equipment" value="seeEquipment">View Equipment<br><br>
+    Personnel<br>
+    <input type="checkbox" name="personnel" value="addStaff">Add New Staff<br>
+    <input type="checkbox" name="personnel" value="addStaff">Change Staff Personal Information<br>
+    <input type="checkbox" name="personnel" value="addStaff">Add new pay rates<br>
+    <input type="checkbox" name="personnel" value="addStaff">Change existing pay rates<br>
+    <input type="checkbox" name="personnel" value="OtherFFInfo">View Other Staff Info<br>
+    <input type="checkbox" name="personnel" value="OtherFFExp">View Other Staff Exposures<br>
+    <input type="checkbox" name="personnel" value="addFFExp">Fill Personal Exposure Report for other staff<br><br>
+     
+     Administrative<br>
+     <input type="checkbox" name="admin" value="genMPI">Generate and Submit MPI Claims<br>
+     <input type="checkbox" name="admin" value="genTraining">Generate Personnel Training Reports<br>
+      <input type="checkbox" name="admin" value="genExp">Generate Exposure Reports<br><br>
+ 	Reset to Default Settings<br>
+    <button type="reset" value="Reset">Reset</button><br><br><br>
+    
+  </fieldset>
+    <br>
+
+  <input type="submit" value="Submit"><br>
+
+</form>
+
+</body>
+</html>
