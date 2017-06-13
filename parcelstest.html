@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+	<title>MB Capital Region 2016 Population</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+	<link rel="stylesheet" href="css/style_2016census.css" />
+	<script src="js/leaflet.js"></script>
+	<script src="js/jquery-3.1.1.min.js"></script>
+	
+
+</head>
+<body>
+<div id="map" style="width: 90%; height; 90%; margin: 0 auto"></div>
+<script src="data/parcels.js"></script>
+
+<script>
+
+var map = L.map('map',{
+	center: [49.885163,-97.129694],
+	zoom: 9,
+	maxZoom: 25
+
+});
+
+map.createPane('labels');
+	
+map.getPane('labels').style.zIndex = 450;
+
+map.getPane('labels').style.pointerEvents = 'none';
+	
+var cartodbAttribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>';
+
+var greybase = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png', {
+	attribution: cartodbAttribution
+}).addTo(map);
+
+L.tileLayer('http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
+		attribution: cartodbAttribution,
+		pane: 'labels'
+	}).addTo(map);
+	
+
+	
+layerMunis = L.geoJson(parcels,{
+	filter: function(feature, layer){
+		if (feature.properties.FIRST_MUNI == "208") return true
+	}
+}).addTo(map);
+	
+</script>
+</body>
+</html>
